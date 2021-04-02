@@ -20,5 +20,15 @@ npm run build
 npm run lint
 ```
 
+### Builds Docker image
+```
+docker build -t soa/music-ui:latest .
+```
+
+### Runs with docker
+```
+docker run -p 80:80 soa/music-ui
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
