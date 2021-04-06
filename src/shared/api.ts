@@ -63,6 +63,7 @@ export class API {
     this.http.interceptors.request.use((config: AxiosRequestConfig) => {
       config.params = config.params || {}
       config.baseURL = this.auth.server
+      config.headers = { Authorization: `Bearer ${this.auth.accessToken}` } || {}
       return config
     })
 
