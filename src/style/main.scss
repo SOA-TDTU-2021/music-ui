@@ -1,10 +1,10 @@
-$theme-elevation-0: hsl(0, 0%, 0%);
-$theme-elevation-1: hsl(0, 0%, 10%);
-$theme-elevation-2: hsl(0, 0%, 20%);
-$theme-text: #ccc;
-$theme-text-muted: #999;
+$theme-elevation-0: #170F23;
+$theme-elevation-1: #231B2E;
+$theme-elevation-2: #2F2739;
+$theme-text: #E6E5E7;
+$theme-text-muted: #d9d1e0;
 
-$primary: #09f;
+$primary: #cea6ff;
 $danger: #ff4141;
 $secondary: $theme-elevation-2;
 
@@ -39,7 +39,7 @@ $custom-range-thumb-bg: $theme-text;
 $custom-range-track-bg: $theme-text-muted;
 
 // Other
-$progress-bg: rgb(35, 35, 35);
+$progress-bg: $theme-elevation-2;
 
 :root {
   --text-muted: #{$theme-text-muted};
@@ -48,7 +48,9 @@ $progress-bg: rgb(35, 35, 35);
 .elevated {
   background-color: $theme-elevation-1;
 }
-
+.player_bg {
+  background-color: #120c1c;
+}
 .breadcrumb {
   background: none !important;
   padding: 0 !important;
@@ -56,6 +58,7 @@ $progress-bg: rgb(35, 35, 35);
 
 a.active {
   color: $primary;
+  background-color: #343138;
 }
 
 h1, h2, h3, h4, h5 {
@@ -78,4 +81,9 @@ $enable-responsive-font-sizes: true;
 .modal-header .close {
   color: $theme-text;
   opacity: 1;
+}
+.text-right {
+  display: block;
+  text-align: right;
+  margin-bottom: 15px;
 }

@@ -24,6 +24,12 @@
                 Could not Register. ({{ error.message }})
               </template>
             </b-alert>
+<<<<<<< HEAD
+=======
+            <router-link class="text-right" :to="{name: 'login'}">
+              Click here to login!
+            </router-link>
+>>>>>>> master
             <button class="btn btn-primary btn-block" :disabled="busy" @click="register">
               <span v-show="false" class="spinner-border spinner-border-sm" /> Register
             </button>
