@@ -63,10 +63,6 @@ export class API {
     this.http.interceptors.request.use((config: AxiosRequestConfig) => {
       config.params = config.params || {}
       config.baseURL = this.auth.server
-      config.params.u = this.auth.email
-      config.params.c = this.clientName
-      config.params.f = 'json'
-      config.params.v = '1.15.0'
       return config
     })
 
