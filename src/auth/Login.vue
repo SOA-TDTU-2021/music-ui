@@ -21,6 +21,12 @@
                 Could not log in. ({{ error.message }})
               </template>
             </b-alert>
+            <!-- <div style="margin-bottom: 15px; text-align: right;">
+              <a href="" >Create account?</a>
+            </div> -->
+            <router-link class="text-right" :to="{name: 'register-route'}">
+              <span>Create account?</span>
+            </router-link>
             <button class="btn btn-primary btn-block" :disabled="busy" @click="login">
               <span v-show="false" class="spinner-border spinner-border-sm" /> Log in
             </button>
