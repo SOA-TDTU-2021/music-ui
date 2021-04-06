@@ -63,33 +63,28 @@ export class API {
     this.http.interceptors.request.use((config: AxiosRequestConfig) => {
       config.params = config.params || {}
       config.baseURL = this.auth.server
-      config.params.u = this.auth.email
-      config.params.c = this.clientName
-      config.params.f = 'json'
-      config.params.v = '1.15.0'
+      config.headers = { Authorization: `Bearer ${this.auth.accessToken}` } || {}
       return config
     })
 
     this.get = (path: string, params: any = {}) => {
       return this.http.get(path, { params }).then(response => {
-        const subsonicResponse = response.data['subsonic-response']
-        if (subsonicResponse.status !== 'ok') {
-          const message = subsonicResponse.error?.message || subsonicResponse.status
+        if (response.data.success !== true) {
+          const message = response.data.error?.message || response.data.status
           const err = new Error(message)
           return Promise.reject(err)
         }
-        return Promise.resolve(subsonicResponse)
+        return Promise.resolve(response.data)
       })
     }
 
     this.post = (path: string, params: any = {}) => {
       return this.http.post(path, params).then(response => {
-        const subsonicResponse = response.data['subsonic-response']
-        if (subsonicResponse.status !== 'ok') {
-          const err = new Error(subsonicResponse.status)
+        if (response.data.success !== true) {
+          const err = new Error(response.data.status)
           return Promise.reject(err)
         }
-        return Promise.resolve(subsonicResponse)
+        return Promise.resolve(response.data)
       })
     }
   }
@@ -113,7 +108,7 @@ export class API {
       size,
       offset,
     }
-    const response = await this.get('rest/getAlbumList2', params)
+    const response = await this.get('rest/getAlbumList', params)
     return (response.albumList2?.album || []).map(this.normalizeAlbum, this)
   }
 
@@ -144,7 +139,7 @@ export class API {
     }[sort]
 
     const params = { type, offset, size }
-    const response = await this.get('rest/getAlbumList2', params)
+    const response = await this.get('rest/getAlbumList', params)
     const albums = response.albumList2?.album || []
     return albums.map(this.normalizeAlbum, this)
   }
