@@ -68,13 +68,12 @@ export class API {
 
     this.get = (path: string, params: any = {}) => {
       return this.http.get(path, { params }).then(response => {
-        const subsonicResponse = response.data['subsonic-response']
-        if (subsonicResponse.status !== 'ok') {
-          const message = subsonicResponse.error?.message || subsonicResponse.status
+        if (response.data.status !== 'ok') {
+          const message = response.data.error?.message || response.data.status
           const err = new Error(message)
           return Promise.reject(err)
         }
-        return Promise.resolve(subsonicResponse)
+        return Promise.resolve(response.data)
       })
     }
 
