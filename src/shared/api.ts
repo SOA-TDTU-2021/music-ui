@@ -107,7 +107,7 @@ export class API {
       size,
       offset,
     }
-    const response = await this.get('rest/getAlbumList2', params)
+    const response = await this.get('rest/getAlbumList', params)
     return (response.albumList2?.album || []).map(this.normalizeAlbum, this)
   }
 
@@ -138,7 +138,7 @@ export class API {
     }[sort]
 
     const params = { type, offset, size }
-    const response = await this.get('rest/getAlbumList2', params)
+    const response = await this.get('rest/getAlbumList', params)
     const albums = response.albumList2?.album || []
     return albums.map(this.normalizeAlbum, this)
   }
