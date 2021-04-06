@@ -59,6 +59,15 @@ export function setupRouter(auth: AuthService) {
         }),
       },
       {
+        name: 'register-route',
+        path: '/register',
+        // redirect: ({
+        //   name: 'albums',
+        //   params: { sort: 'recently-added' }
+        // }),
+        component: Register,
+      },
+      {
         name: 'albums',
         path: '/albums/:sort',
         component: AlbumLibrary,
