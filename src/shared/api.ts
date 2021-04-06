@@ -68,7 +68,7 @@ export class API {
 
     this.get = (path: string, params: any = {}) => {
       return this.http.get(path, { params }).then(response => {
-        if (response.data.status !== 'ok') {
+        if (response.data.success !== true) {
           const message = response.data.error?.message || response.data.status
           const err = new Error(message)
           return Promise.reject(err)
@@ -79,12 +79,11 @@ export class API {
 
     this.post = (path: string, params: any = {}) => {
       return this.http.post(path, params).then(response => {
-        const subsonicResponse = response.data['subsonic-response']
-        if (subsonicResponse.status !== 'ok') {
-          const err = new Error(subsonicResponse.status)
+        if (response.data.success !== true) {
+          const err = new Error(response.data.status)
           return Promise.reject(err)
         }
-        return Promise.resolve(subsonicResponse)
+        return Promise.resolve(response.data)
       })
     }
   }
