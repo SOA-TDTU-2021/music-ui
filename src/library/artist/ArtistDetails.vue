@@ -4,15 +4,6 @@
       <div class="col col-xl-8">
         <h1>{{ item.name }}</h1>
         <p>{{ item.description }}</p>
-        <ExternalLink v-if="item.lastFmUrl" :href="item.lastFmUrl" class="btn btn-secondary mr-2">
-          Last.fm
-        </ExternalLink>
-        <ExternalLink
-          v-if="item.musicBrainzUrl"
-          :href="item.musicBrainzUrl"
-          class="btn btn-secondary">
-          MusicBrainz
-        </ExternalLink>
       </div>
     </div>
     <h3 class="pt-5">
@@ -20,12 +11,6 @@
     </h3>
     <AlbumList :items="item.albums" />
 
-    <template v-if="item.similarArtist.length > 0">
-      <h3 class="pt-5">
-        Similar artists
-      </h3>
-      <ArtistList :items="item.similarArtist" />
-    </template>
   </ContentLoader>
 </template>
 <script lang="ts">

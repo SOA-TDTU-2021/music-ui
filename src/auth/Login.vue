@@ -67,7 +67,6 @@
       this.email = this.$auth.email
       const success = await this.$auth.checkTokenExist()
       if (success) {
-        console.log('created()')
         this.$store.commit('setLoginSuccess', {
           email: this.email,
           accessToken: this.$auth.accessToken,

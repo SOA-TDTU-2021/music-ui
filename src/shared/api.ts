@@ -40,9 +40,6 @@ export interface Artist {
   albumCount: number
   description?: string
   starred: boolean
-  lastFmUrl?: string
-  musicBrainzUrl?: string
-  similarArtist?: Artist[]
   albums?: Album[]
 }
 
@@ -146,11 +143,10 @@ export class API {
 
   async getArtistDetails(id: string): Promise<Artist> {
     const params = { id }
-    const [info1, info2] = await Promise.all([
+    const [info1] = await Promise.all([
       this.get('rest/getArtist', params).then(r => r.artist),
-      this.get('rest/getArtistInfo2', params).then(r => r.artistInfo2),
     ])
-    return this.normalizeArtist({ ...info1, ...info2 })
+    return this.normalizeArtist({ ...info1 })
   }
 
   async getAlbumDetails(id: string): Promise<Album> {
@@ -319,15 +315,10 @@ export class API {
     return {
       id: item.id,
       name: item.name,
-      description: (item.biography || '').replace(/<a[^>]*>.*?<\/a>/gm, ''),
+      description: (item.description || '').replace(/<a[^>]*>.*?<\/a>/gm, ''),
       starred: !!item.starred,
       albumCount: item.albumCount,
-      lastFmUrl: item.lastFmUrl,
-      musicBrainzUrl: item.musicBrainzId
-        ? `https://musicbrainz.org/artist/${item.musicBrainzId}`
-        : undefined,
       albums,
-      similarArtist: (item.similarArtist || []).map(this.normalizeArtist, this)
     }
   }
 
