@@ -331,40 +331,10 @@ export class API {
     }
   }
 
-  private normalizePodcast(podcast: any): any {
-    const image = podcast.originalImageUrl
-    return {
-      id: podcast.id,
-      name: podcast.title,
-      description: podcast.description,
-      image: image,
-      url: podcast.url,
-      trackCount: podcast.episode.length,
-      tracks: podcast.episode.map((episode: any, index: number) => ({
-        id: episode.id,
-        title: episode.title,
-        duration: episode.duration,
-        starred: false,
-        track: podcast.episode.length - index,
-        album: podcast.title,
-        albumId: null,
-        artist: '',
-        artistId: null,
-        image,
-        url: episode.streamId ? this.getStreamUrl(episode.streamId) : null,
-        description: episode.description,
-        playable: episode.status === 'completed',
-      })),
-    }
-  }
-
   getDownloadUrl(id: any) {
     const { server, email } = this.auth
     return `${server}/rest/download` +
-      `?id=${id}` +
-      '&v=1.15.0' +
-      `&u=${email}` +
-      `&c=${this.clientName}`
+      `?id=${id}`
   }
 
   private getCoverArtUrl(item: any) {
@@ -374,9 +344,6 @@ export class API {
     const { server, email } = this.auth
     return `${server}/rest/getCoverArt` +
       `?id=${item.coverArt}` +
-      '&v=1.15.0' +
-      `&u=${email}` +
-      `&c=${this.clientName}` +
       '&size=300'
   }
 
@@ -384,9 +351,6 @@ export class API {
     const { server, email } = this.auth
     return `${server}/rest/stream` +
       `?id=${id}` +
-      '&format=raw' +
-      '&v=1.15.0' +
-      `&u=${email}` +
-      `&c=${this.clientName}`
+      '&format=raw'
   }
 }
