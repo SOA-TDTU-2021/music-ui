@@ -8,7 +8,7 @@
         Add to queue
       </b-dropdown-item-button>
       <b-dropdown-item-button @click="toggleStarred()">
-        {{ starred ? 'Unstar' : 'Star' }}
+        {{ starred ? 'Star' : 'Unstar' }}
       </b-dropdown-item-button>
       <b-dropdown-item-button @click="download()">
         Download
