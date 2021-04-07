@@ -185,11 +185,10 @@ export class API {
     return this.getPlaylists()
   }
 
-  async editPlaylist(playlistId: string, name: string, comment: string) {
+  async editPlaylist(playlistId: string, name: string) {
     const params = {
       playlistId,
       name,
-      comment,
     }
     await this.get('rest/updatePlaylist', params)
   }
@@ -267,10 +266,6 @@ export class API {
       albums: (data.searchResult3.album || []).map(this.normalizeAlbum, this),
       artists: (data.searchResult3.artist || []).map(this.normalizeArtist, this),
     }
-  }
-
-  async scan(): Promise<void> {
-    return this.get('rest/startScan')
   }
 
   async scrobble(id: string): Promise<void> {

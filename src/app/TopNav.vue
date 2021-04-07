@@ -15,19 +15,16 @@
             <Icon icon="person-fill" />
           </b-avatar>
         </template>
-        <b-dropdown-text>
+        <!-- <b-dropdown-text>
           {{ server }}
-        </b-dropdown-text>
+        </b-dropdown-text> -->
         <b-dropdown-text>
           {{ email }}
         </b-dropdown-text>
         <b-dropdown-divider />
         <b-dropdown-item :href="`${server}/settings.view`" target="_blank">
-          Server settings
+          Admin panel
         </b-dropdown-item>
-        <b-dropdown-item-button @click="scan">
-          Scan media folders
-        </b-dropdown-item-button>
         <b-dropdown-item-button @click="showAboutModal = true">
           About
         </b-dropdown-item-button>
@@ -66,9 +63,6 @@
       ...mapActions([
         'showMenu',
       ]),
-      scan() {
-        return this.$api.scan()
-      },
       logout() {
         this.$auth.logout()
         this.$router.go(0)

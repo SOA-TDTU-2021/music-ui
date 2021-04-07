@@ -11,9 +11,6 @@
         </b-dropdown-item-btn>
       </OverflowMenu>
     </div>
-    <p v-if="playlist.comment" class="text-muted">
-      {{ playlist.comment }}
-    </p>
     <TrackList :tracks="playlist.tracks">
       <template #context-menu="{index}">
         <b-dropdown-item-button @click="remove(index)">
@@ -28,9 +25,6 @@
       <template #default="{ item }">
         <b-form-group label="Name">
           <b-form-input v-model="item.name" type="text" />
-        </b-form-group>
-        <b-form-group label="Comment">
-          <b-form-textarea v-model="item.comment" />
         </b-form-group>
       </template>
     </EditModal>

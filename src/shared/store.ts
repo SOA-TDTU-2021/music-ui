@@ -70,12 +70,11 @@ const setupRootModule = (authService: AuthService, api: API): Module<State, any>
         commit('setPlaylists', result)
       })
     },
-    updatePlaylist({ commit, state }, { id, name, comment }) {
-      api.editPlaylist(id, name, comment).then(() => {
+    updatePlaylist({ commit, state }, { id, name }) {
+      api.editPlaylist(id, name).then(() => {
         const playlist = {
           ...state.playlists.find(x => x.id === id),
           name,
-          comment,
         }
         commit('setPlaylist', playlist)
       })
