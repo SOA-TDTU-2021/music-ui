@@ -88,7 +88,7 @@ export class API {
 
   async getGenres() {
     const response = await this.get('rest/getGenres', {})
-    return response.genres.genre
+    return response.genres
       .map((item: any) => ({
         id: item.value,
         name: item.value,
@@ -106,7 +106,7 @@ export class API {
       offset,
     }
     const response = await this.get('rest/getAlbumList', params)
-    return (response.albumList2?.album || []).map(this.normalizeAlbum, this)
+    return (response.albums || []).map(this.normalizeAlbum, this)
   }
 
   async getTracksByGenre(id: string, size: number, offset = 0) {
@@ -116,7 +116,7 @@ export class API {
       offset,
     }
     const response = await this.get('rest/getSongsByGenre', params)
-    return (response.songsByGenre?.song || []).map(this.normalizeTrack, this)
+    return (response.songs || []).map(this.normalizeTrack, this)
   }
 
   async getArtists(): Promise<Artist[]> {
@@ -137,7 +137,7 @@ export class API {
 
     const params = { type, offset, size }
     const response = await this.get('rest/getAlbumList', params)
-    const albums = response.albumList2?.album || []
+    const albums = response.albums || []
     return albums.map(this.normalizeAlbum, this)
   }
 
@@ -157,7 +157,7 @@ export class API {
 
   async getPlaylists() {
     const response = await this.get('rest/getPlaylists')
-    return (response.playlists?.playlist || []).map((playlist: any) => ({
+    return (response.playlists || []).map((playlist: any) => ({
       ...playlist,
       name: playlist.name || '(Unnamed)',
       image: playlist.songCount > 0 ? this.getCoverArtUrl(playlist) : undefined,
@@ -218,15 +218,15 @@ export class API {
       size: 200,
     }
     const response = await this.get('rest/getRandomSongs', params)
-    return (response.randomSongs?.song || []).map(this.normalizeTrack, this)
+    return (response.randomSongs || []).map(this.normalizeTrack, this)
   }
 
   async getStarred() {
-    const response = await this.get('rest/getStarred2')
+    const response = await this.get('rest/getStarred')
     return {
-      albums: (response.starred2?.album || []).map(this.normalizeAlbum, this),
-      artists: (response.starred2?.artist || []).map(this.normalizeArtist, this),
-      tracks: (response.starred2?.song || []).map(this.normalizeTrack, this)
+      albums: (response.starred?.album || []).map(this.normalizeAlbum, this),
+      artists: (response.starred?.artist || []).map(this.normalizeArtist, this),
+      tracks: (response.starred?.song || []).map(this.normalizeTrack, this)
     }
   }
 
