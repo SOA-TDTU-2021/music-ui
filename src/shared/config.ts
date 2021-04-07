@@ -2,9 +2,6 @@ export interface Config {
   serverUrl: string
 }
 
-const env = (window as any).env
-
 export const config: Config = {
-  // serverUrl: env?.SERVER_URL || '',
-  serverUrl: 'https://music-api.xuansang.ga',
+  serverUrl: process.env.SERVER_URL || 'https://music-api.xuansang.ga',
 }
